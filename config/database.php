@@ -32,6 +32,39 @@ return [
 
     'connections' => [
 
+        // ServIt platform DB — admins, tenants, plans, billing, invitations
+        'servit' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'servit'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        // Tenant DB — switched per request by TenantDatabaseMiddleware
+        // Points to tenant_{id} for each client's TastyIgniter data
+        'tenant' => [
+            'driver' => 'mysql',
+            'host' => env('TENANT_DB_HOST', env('DB_HOST', '127.0.0.1')),
+            'port' => env('TENANT_DB_PORT', env('DB_PORT', '3306')),
+            'database' => env('TENANT_DB_DATABASE', 'tenant_1'),
+            'username' => env('TENANT_DB_USERNAME', env('DB_USERNAME', 'root')),
+            'password' => env('TENANT_DB_PASSWORD', env('DB_PASSWORD', '')),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),

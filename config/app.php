@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'ServIt'),
+
+    'root_domain' => env('ROOT_DOMAIN', 'servit.app'),
 
     /*
     |--------------------------------------------------------------------------
