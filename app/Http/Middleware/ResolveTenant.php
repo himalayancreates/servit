@@ -29,19 +29,27 @@ class ResolveTenant
             return $next($request);
         }
 
-        // Resolve tenant from cache or DB (cache for 5 min to avoid per-request DB hit)
-        $tenant = Cache::store('file')->remember("tenant:slug:{$subdomain}", 300, function () use ($subdomain) {
-            return Tenant::on('servit')->where('slug', $subdomain)->first();
+        // Cache plain array (not Eloquent model) to avoid deserialization class-not-found issues
+        $tenantData = Cache::store('file')->remember("tenant:slug:{$subdomain}", 300, function () use ($subdomain) {
+            $t = Tenant::on('servit')->where('slug', $subdomain)->first();
+            return $t ? ['id' => $t->id, 'name' => $t->name, 'slug' => $t->slug, 'status' => $t->status, 'db_name' => $t->db_name, 'db_host' => $t->db_host] : null;
         });
 
-        if (! $tenant) {
+        if (! $tenantData) {
             abort(404, "Restaurant '{$subdomain}' not found.");
         }
 
+        $tenant = new Tenant($tenantData);
+        $tenant->exists = true;
+
         // Switch the tenant DB connection to this tenant's database
-        Config::set('database.connections.tenant.database', $tenant->db_name);
-        Config::set('database.connections.tenant.host', $tenant->db_host);
+        Config::set('database.connections.tenant.database', $tenantData['db_name']);
+        Config::set('database.connections.tenant.host', $tenantData['db_host']);
         DB::purge('tenant');
+
+        // Make 'tenant' the default so TastyIgniter queries hit the right DB.
+        // ServIt models are explicitly bound to 'servit' connection and are unaffected.
+        Config::set('database.default', 'tenant');
 
         // Make current tenant available to the rest of the request
         app()->instance('current.tenant', $tenant);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ServitAdmin;
 use App\Models\User;
 
 return [
@@ -42,6 +43,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'superadmin' => [
+            'driver' => 'session',
+            'provider' => 'servit_admins',
+        ],
     ],
 
     /*
@@ -65,6 +71,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
+        ],
+
+        'servit_admins' => [
+            'driver' => 'eloquent',
+            'model' => ServitAdmin::class,
         ],
 
         // 'users' => [
