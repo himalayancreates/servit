@@ -24,8 +24,23 @@ class ResolveTenant
             ? substr($host, 0, strlen($host) - strlen('.' . $rootDomain))
             : null;
 
-        // No subdomain or reserved subdomains → ServIt platform routes
+        // No subdomain or reserved subdomains → ServIt platform only.
+        // TastyIgniter routes (/, /login, /admin, etc.) are also active globally but have
+        // no valid DB on the root domain. Intercept anything that isn't a ServIt portal
+        // path and redirect to the dashboard before TastyIgniter middleware can run.
         if (! $subdomain || in_array($subdomain, ['www', 'app', 'cdn', 'api'])) {
+            $path = $request->path();
+            $isPortalPath = str_starts_with($path, 'dashboard')
+                || str_starts_with($path, 'portal')   // client portal
+                || str_starts_with($path, '_')        // /_ignition, /_debugbar
+                || str_starts_with($path, 'build/')   // Vite assets
+                || str_starts_with($path, 'storage/') // storage symlink
+                || $path === 'up';                    // health-check
+
+            if (! $isPortalPath) {
+                return redirect()->route('dashboard.login');
+            }
+
             return $next($request);
         }
 

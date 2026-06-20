@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tenant extends Model
 {
@@ -25,22 +24,12 @@ class Tenant extends Model
 
     public function plan(): BelongsTo
     {
-        return $this->belongsTo(Plan::class)->on('servit');
+        return $this->belongsTo(Plan::class);
     }
 
     public function invitation(): BelongsTo
     {
-        return $this->belongsTo(Invitation::class)->on('servit');
-    }
-
-    public function addOns(): HasMany
-    {
-        return $this->hasMany(TenantAddOn::class)->on('servit');
-    }
-
-    public function domains(): HasMany
-    {
-        return $this->hasMany(TenantDomain::class)->on('servit');
+        return $this->belongsTo(Invitation::class);
     }
 
     public function isTrialing(): bool

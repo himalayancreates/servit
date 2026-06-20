@@ -28,7 +28,7 @@
     <div class="col-span-2 bg-white rounded-xl border border-gray-200">
         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 class="font-semibold text-gray-900">Recent Clients</h2>
-            <a href="{{ route('superadmin.tenants.index') }}" class="text-sm text-orange-500 hover:text-orange-600 font-medium">View all →</a>
+            <a href="{{ route('dashboard.tenants.index') }}" class="text-sm text-orange-500 hover:text-orange-600 font-medium">View all →</a>
         </div>
         <div class="divide-y divide-gray-50">
             @forelse($recentTenants as $tenant)
@@ -46,7 +46,7 @@
                     ">
                         {{ ucfirst($tenant->status) }}
                     </span>
-                    <a href="{{ route('superadmin.tenants.access', $tenant) }}"
+                    <a href="{{ route('dashboard.tenants.access', $tenant) }}"
                        class="text-xs text-orange-500 hover:text-orange-600 font-medium">
                         Manage →
                     </a>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ClientUser;
 use App\Models\ServitAdmin;
 use App\Models\User;
 
@@ -48,6 +49,11 @@ return [
             'driver' => 'session',
             'provider' => 'servit_admins',
         ],
+
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'client_users',
+        ],
     ],
 
     /*
@@ -76,6 +82,11 @@ return [
         'servit_admins' => [
             'driver' => 'eloquent',
             'model' => ServitAdmin::class,
+        ],
+
+        'client_users' => [
+            'driver' => 'eloquent',
+            'model' => ClientUser::class,
         ],
 
         // 'users' => [

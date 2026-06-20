@@ -3,6 +3,22 @@
 @section('title', 'Clients')
 
 @section('content')
+
+@if(session('invite_link'))
+<div class="mb-6 rounded-lg bg-blue-50 border border-blue-200 px-4 py-4">
+    <p class="text-sm font-semibold text-blue-800 mb-1">{{ session('success') }}</p>
+    <p class="text-xs text-blue-700 mb-2">Share this invite link (expires in 7 days):</p>
+    <div class="flex items-center gap-2">
+        <code class="flex-1 bg-white border border-blue-200 rounded px-3 py-1.5 text-xs text-blue-900 font-mono break-all">{{ session('invite_link') }}</code>
+        <button onclick="navigator.clipboard.writeText('{{ session('invite_link') }}')"
+            class="shrink-0 rounded bg-blue-600 text-white px-3 py-1.5 text-xs font-medium hover:bg-blue-700">Copy</button>
+    </div>
+</div>
+@elseif(session('success'))
+<div class="mb-6 rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+    {{ session('success') }}
+</div>
+@endif
 <div class="mb-6 flex items-center justify-between">
     <div>
         <h1 class="text-2xl font-bold text-gray-900">Clients</h1>
@@ -10,7 +26,7 @@
     </div>
 
     <!-- Invite form -->
-    <form method="POST" action="{{ route('superadmin.tenants.invite') }}" class="flex gap-2">
+    <form method="POST" action="{{ route('dashboard.tenants.invite') }}" class="flex gap-2">
         @csrf
         <input
             type="email"
@@ -61,7 +77,7 @@
                 </td>
                 <td class="px-6 py-4 font-mono text-xs text-gray-400">{{ $tenant->db_name }}</td>
                 <td class="px-6 py-4 text-right">
-                    <a href="{{ route('superadmin.tenants.access', $tenant) }}"
+                    <a href="{{ route('dashboard.tenants.access', $tenant) }}"
                        class="inline-flex items-center gap-1 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-600 px-3 py-1.5 text-xs font-semibold transition-colors">
                         Manage
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
