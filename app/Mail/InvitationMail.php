@@ -26,7 +26,7 @@ class InvitationMail extends Mailable
     {
         return new Envelope(
             to: $this->invitation->email,
-            subject: "You've been invited to start your free trial on ServIt",
+            subject: "You've been invited to set up your restaurant on ServIt",
         );
     }
 

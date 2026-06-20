@@ -54,14 +54,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->enum('status', ['trialing', 'active', 'past_due', 'suspended', 'cancelled'])->default('trialing');
+            $table->enum('status', ['pending', 'active', 'past_due', 'suspended', 'cancelled'])->default('pending');
             $table->foreignId('plan_id')->nullable()->constrained('plans')->nullOnDelete();
             $table->foreignId('invitation_id')->nullable()->constrained('invitations')->nullOnDelete();
             $table->string('db_name')->unique(); // tenant_{id}
             $table->string('db_host')->default('127.0.0.1');
             $table->string('stripe_customer_id')->nullable()->unique();       // ServIt subscription billing
             $table->string('stripe_connect_account_id')->nullable()->unique(); // Restaurant's own Stripe
-            $table->timestamp('trial_ends_at')->nullable();
+            $table->unsignedInteger('overage_fee_per_order_cents')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
 

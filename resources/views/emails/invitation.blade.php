@@ -41,8 +41,7 @@
                 </p>
 
                 <p class="text">
-                    You'll get a <span class="highlight">14-day free trial</span> to try everything out:
-                    online ordering, menu management, reservation booking, and more.
+                    Get online ordering, menu management, reservation booking, and more — all in one place.
                 </p>
 
                 <div class="cta-wrap">

@@ -59,11 +59,9 @@
 
             <button type="submit"
                 class="w-full rounded-lg bg-orange-500 hover:bg-orange-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors">
-                Create account &amp; start free trial
+                Create account
             </button>
         </form>
-
-        <p class="mt-4 text-center text-xs text-gray-500">14-day free trial. No credit card required.</p>
     </div>
 </body>
 </html>

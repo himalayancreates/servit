@@ -15,10 +15,10 @@ class DashboardController extends Controller
     public function index(): View
     {
         $stats = [
-            'total_tenants'   => Tenant::on('servit')->count(),
-            'active_tenants'  => Tenant::on('servit')->whereIn('status', ['trialing', 'active'])->count(),
-            'trialing'        => Tenant::on('servit')->where('status', 'trialing')->count(),
-            'past_due'        => Tenant::on('servit')->where('status', 'past_due')->count(),
+            'total_tenants'  => Tenant::on('servit')->count(),
+            'active_tenants' => Tenant::on('servit')->where('status', 'active')->count(),
+            'pending'        => Tenant::on('servit')->where('status', 'pending')->count(),
+            'past_due'       => Tenant::on('servit')->where('status', 'past_due')->count(),
         ];
 
         $recentTenants = Tenant::on('servit')

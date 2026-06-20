@@ -48,7 +48,6 @@
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Client</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Plan</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
-                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Trial ends</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Database</th>
                 <th class="px-6 py-3"></th>
             </tr>
@@ -64,16 +63,13 @@
                 <td class="px-6 py-4">
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
                         {{ $tenant->status === 'active'    ? 'bg-green-50 text-green-700' : '' }}
-                        {{ $tenant->status === 'trialing'  ? 'bg-blue-50 text-blue-700' : '' }}
+                        {{ $tenant->status === 'pending'   ? 'bg-amber-50 text-amber-700' : '' }}
                         {{ $tenant->status === 'past_due'  ? 'bg-red-50 text-red-700' : '' }}
                         {{ $tenant->status === 'suspended' ? 'bg-gray-100 text-gray-600' : '' }}
                         {{ $tenant->status === 'cancelled' ? 'bg-gray-100 text-gray-500' : '' }}
                     ">
                         {{ ucfirst(str_replace('_', ' ', $tenant->status)) }}
                     </span>
-                </td>
-                <td class="px-6 py-4 text-gray-500 text-xs">
-                    {{ $tenant->trial_ends_at?->format('M d, Y') ?? '—' }}
                 </td>
                 <td class="px-6 py-4 font-mono text-xs text-gray-400">{{ $tenant->db_name }}</td>
                 <td class="px-6 py-4 text-right">

@@ -13,7 +13,7 @@
     @foreach([
         ['label' => 'Total Clients',   'value' => $stats['total_tenants'],  'color' => 'text-gray-900'],
         ['label' => 'Active',          'value' => $stats['active_tenants'], 'color' => 'text-green-600'],
-        ['label' => 'Trialing',        'value' => $stats['trialing'],       'color' => 'text-blue-600'],
+        ['label' => 'Pending',         'value' => $stats['pending'],        'color' => 'text-amber-600'],
         ['label' => 'Past Due',        'value' => $stats['past_due'],       'color' => 'text-red-600'],
     ] as $stat)
     <div class="bg-white rounded-xl border border-gray-200 px-6 py-5">
@@ -40,7 +40,7 @@
                 <div class="flex items-center gap-4">
                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
                         {{ $tenant->status === 'active' ? 'bg-green-50 text-green-700' : '' }}
-                        {{ $tenant->status === 'trialing' ? 'bg-blue-50 text-blue-700' : '' }}
+                        {{ $tenant->status === 'pending' ? 'bg-amber-50 text-amber-700' : '' }}
                         {{ $tenant->status === 'past_due' ? 'bg-red-50 text-red-700' : '' }}
                         {{ $tenant->status === 'suspended' ? 'bg-gray-100 text-gray-600' : '' }}
                     ">

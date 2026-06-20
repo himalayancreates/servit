@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Portal;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CreateTenantJob;
 use App\Models\ClientUser;
 use App\Models\Invitation;
 use App\Models\Tenant;
@@ -87,8 +88,7 @@ class AuthController extends Controller
         $tenant = Tenant::create([
             'name'          => $data['restaurant_name'],
             'slug'          => $slug,
-            'status'        => 'trialing',
-            'trial_ends_at' => now()->addDays(14),
+            'status'        => 'pending',
             'invitation_id' => $invitation->id,
             'db_name'       => 'tenant_' . ($invitation->id),
             'db_host'       => env('TENANT_DB_HOST', '127.0.0.1'),
@@ -102,6 +102,9 @@ class AuthController extends Controller
         ]);
 
         $invitation->update(['accepted_at' => now()]);
+
+        // Provision the tenant DB in the background
+        CreateTenantJob::dispatch($tenant, $client);
 
         app('auth')->guard('client')->login($client);
         $request->session()->regenerate();

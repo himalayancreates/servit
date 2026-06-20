@@ -13,13 +13,9 @@ class Tenant extends Model
 
     protected $fillable = [
         'name', 'slug', 'status', 'plan_id', 'invitation_id',
-        'db_name', 'db_host',
+        'db_name', 'db_host', 'db_provisioned',
         'stripe_customer_id', 'stripe_connect_account_id',
-        'trial_ends_at',
-    ];
-
-    protected $casts = [
-        'trial_ends_at' => 'datetime',
+        'overage_fee_per_order_cents', 'notes',
     ];
 
     public function plan(): BelongsTo
@@ -32,13 +28,8 @@ class Tenant extends Model
         return $this->belongsTo(Invitation::class);
     }
 
-    public function isTrialing(): bool
-    {
-        return $this->status === 'trialing' && $this->trial_ends_at?->isFuture();
-    }
-
     public function isActive(): bool
     {
-        return in_array($this->status, ['trialing', 'active']);
+        return $this->status === 'active';
     }
 }
