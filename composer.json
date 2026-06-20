@@ -1,6 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.tastyigniter.com",
+            "canonical": false
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:himalayancreates/TastyIgniter-core.git"
+        }
+    ],
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
@@ -11,7 +22,8 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.8",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "tastyigniter/core": "4.x-dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -84,6 +96,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
