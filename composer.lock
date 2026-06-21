@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "737de8e71342510905dcb14850c2093c",
+    "content-hash": "a532fc82f8756525ba2db69e89f60081",
     "packages": [
         {
             "name": "ably/ably-php",
@@ -10631,12 +10631,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/himalayancreates/TastyIgniter-core.git",
-                "reference": "ff72e92733f0c62450fd2abf6cf51a5055e8996d"
+                "reference": "376e133ffc0c10fa01638da24ec18bd6575bc341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/himalayancreates/TastyIgniter-core/zipball/ff72e92733f0c62450fd2abf6cf51a5055e8996d",
-                "reference": "ff72e92733f0c62450fd2abf6cf51a5055e8996d",
+                "url": "https://api.github.com/repos/himalayancreates/TastyIgniter-core/zipball/376e133ffc0c10fa01638da24ec18bd6575bc341",
+                "reference": "376e133ffc0c10fa01638da24ec18bd6575bc341",
                 "shasum": ""
             },
             "require": {
@@ -10772,7 +10772,7 @@
             "support": {
                 "source": "https://github.com/himalayancreates/TastyIgniter-core/tree/4.x"
             },
-            "time": "2026-06-18T18:20:08+00:00"
+            "time": "2026-06-21T01:09:28+00:00"
         },
         {
             "name": "tastyigniter/ti-ext-api",
