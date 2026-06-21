@@ -14,7 +14,8 @@ class Plan extends Model
     protected $fillable = [
         'name', 'slug', 'stripe_product_id', 'stripe_price_id',
         'order_limit', 'rate_limit_per_hour', 'locations_included',
-        'platform_fee_percent', 'price_monthly_cents', 'is_active',
+        'platform_fee_percent', 'price_monthly_cents', 'overage_fee_per_order_cents',
+        'is_active',
     ];
 
     protected $casts = [
@@ -22,6 +23,11 @@ class Plan extends Model
         'order_limit' => 'integer',
         'rate_limit_per_hour' => 'integer',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function tenants(): HasMany
     {

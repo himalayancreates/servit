@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('locations_included')->default(1);
             $table->decimal('platform_fee_percent', 5, 2)->default(1.00);
             $table->unsignedInteger('price_monthly_cents');
+            $table->unsignedInteger('overage_fee_per_order_cents')->default(10);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

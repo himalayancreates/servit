@@ -28,6 +28,11 @@ class Tenant extends Model
         return $this->belongsTo(Invitation::class);
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function isActive(): bool
     {
         return $this->status === 'active';

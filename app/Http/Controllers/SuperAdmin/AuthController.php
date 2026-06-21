@@ -7,14 +7,13 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
     public function showLogin(): View|RedirectResponse
     {
-        if (Auth::guard('superadmin')->check()) {
+        if (app('auth')->guard('superadmin')->check()) {
             return redirect()->route('dashboard.home');
         }
 
@@ -28,7 +27,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('superadmin')->attempt($credentials, $request->boolean('remember'))) {
+        if (app('auth')->guard('superadmin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('dashboard.home'));
         }
@@ -38,7 +37,7 @@ class AuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::guard('superadmin')->logout();
+        app('auth')->guard('superadmin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
